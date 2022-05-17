@@ -1,0 +1,30 @@
+func romanToInt(input: String) {
+  let allowedCharacter = ["I", "V", "X", "L", "C", "D", "M"]
+  let values = [1, 5, 10, 50, 100, 500, 1000]
+  var isValid = true, result = 0
+  let reverseInput = String(input.reversed())
+  var lastNumber = 0
+  for ch in reverseInput {
+    let position = allowedCharacter.firstIndex(of: "\(ch)")
+    if let index = position {
+      if lastNumber == 0 {
+        result += values[index]
+      } else {
+          if  values[index] < lastNumber {
+            result -= values[index]
+          } else {
+            result += values[index]
+          }               
+        }
+        lastNumber = values[index]
+      } else {
+        isValid = false
+        break
+      }
+  }
+  if isValid {
+    print("total: \(result)")
+  } else {
+    print("Enter valid inputs")
+  }
+}
