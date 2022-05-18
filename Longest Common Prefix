@@ -1,0 +1,29 @@
+/*
+ input =  [flower, flow, fllip]
+ Output: "fl"
+ 
+ Input: strs = ["dog","racecar","car"]
+ Output: ""
+ Explanation: There is no common prefix among the input strings.
+*/
+func logestCommonrefix(input: [String]) -> String {
+    if input.count == 0 {return " "}
+    var prefix = input[0]
+    for (index, _) in input.enumerated() {
+        if index + 1 < input.count {
+            var nextItem = input[index + 1]
+            while prefix.count != 0 {
+                let nextRange = nextItem.startIndex...nextItem.index(before: prefix.endIndex)
+                if  prefix.count <= nextItem.count {
+                    nextItem = String(nextItem[nextRange])
+                    if prefix == nextItem {
+                        break
+                    }
+                }
+                let range = prefix.startIndex..<prefix.index(before: prefix.endIndex)
+                prefix = String(prefix[range])
+            }
+        }
+    }
+    return prefix
+}
