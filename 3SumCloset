@@ -1,0 +1,37 @@
+
+/// Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
+/// Return the sum of the three integers.
+/// You may assume that each input would have exactly one solution.
+/// Example:
+/// Input: nums = [-1,2,1,-4], target = 1
+/// Output: 2
+/// Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+/// 
+class Solution {
+    func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
+        var diff = INT_MAX
+        var sum = 0
+        var numbersCollection = nums
+        numbersCollection.sort()
+        for index in 0...numbersCollection.count - 1 {
+            let firstElement = numbersCollection[index]
+            var end = numbersCollection.count - 1
+            var start = index + 1
+            while start < end {
+                if (firstElement + numbersCollection[start] + numbersCollection[end]) == target {
+                    return target
+
+                } else if abs((firstElement + numbersCollection[start] + numbersCollection[end]) - target) < diff  {
+                    diff = Int32(abs((firstElement + numbersCollection[start] + numbersCollection[end]) - target ))
+                    sum = firstElement + numbersCollection[start] + numbersCollection[end]
+                }
+                if (firstElement + numbersCollection[start] + numbersCollection[end]) > target {
+                    end -= 1
+                } else {
+                    start += 1
+               }
+            }
+        }
+        return sum
+    }
+}
